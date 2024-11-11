@@ -1,0 +1,6 @@
+tweepy
+transformers
+torch
+python-dotenv
+schedule
+aiohttp
