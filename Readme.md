@@ -1,34 +1,33 @@
 # Crypto-Twi-Bot
 
-Crypto-Twi-Bot is an automated Twitter bot that posts AI-generated thoughts about cryptocurrency. The content is based on a customized dataset to capture the style and tone relevant to the crypto theme.
+Crypto-Twi-Bot is a Twitter automation bot that generates and posts tweets, comments, replies, and retweets related to cryptocurrency. It uses Google Gemini for tweet generation and interacts with Twitter using cookies.
 
-## Setup Instructions
+## Features
 
-1. Clone the project:
-    ```bash
-    git clone https://github.com/AICecilia/Crypto-Twi-Bot.git
-    cd Crypto-Twi-Bot
-    ```
+- **Tweet Generation**: Generates cryptocurrency-related tweets with a casual, motivational tone.
+- **Auto Reply**: Replies to comments on tweets automatically.
+- **Commenting**: Comments on the latest tweets from a specified user.
+- **Retweeting**: Retweets the latest tweet from a specified user.
+- **Scheduled Posts**: Tweets, comments, and retweets are posted at random intervals.
+- **Cookie-Based Authentication**: Uses Twitter cookies for authentication (no API keys required).
 
-2. Install dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
+## Setup
 
-3. Configure environment variables:
-   - Copy `.env.example` to `.env`:
-     ```bash
-     cp .env.example .env
-     ```
-   - Insert your Twitter API keys in the `.env` file.
+### Prerequisites
 
-4. Run the project:
-    ```bash
-    python main.py
-    ```
+- Python 3.8+
+- Twitter cookies (instructions below)
+- Google Gemini API key
 
-## Project Structure
+### Installation
 
-- `main.py`: The main script to run the bot.
-- `src/`: Contains modularized source code files.
-- `data/cecilia_hsueh_tweets.json`: Example tweet dataset.
+1. **Clone the Repository**
+
+   ```bash
+   git clone https://github.com/AICecilia/Crypto-Twi-Bot.git
+   cd Crypto-Twi-Bot
+
+2. **Run the Bot**
+
+npm install
+python main.py
