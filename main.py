@@ -1,24 +1,43 @@
-import asyncio
-import random
-from src.config import load_environment_variables
-from src.twitter_client import initialize_twitter_client
-from src.tweet_generation import initialize_gpt2_model
-from src.scheduler import setup_scheduled_tasks, run_schedule
-from src.logger import logger
+import time
+import logging
+from post_tweet import post_tweet
+from retweet import retweet
+from comment_on_tweet import comment_on_tweet
+from auto_reply_to_comment import auto_reply_to_comment
 
-if __name__ == "__main__":
-    try:
-        load_environment_variables()
-        client = initialize_twitter_client()
-        model, tokenizer = initialize_gpt2_model()
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-        json_path = "./data/cecilia_hsueh_tweets.json"
-        setup_scheduled_tasks(client, model, tokenizer, json_path)
+def log_info(message):
+    logging.info(message)
 
-        logger.info("Starting Crypto-Twi-Bot with async scheduling...")
-        asyncio.run(run_schedule())
+def log_error(message):
+    logging.error(message)
 
-    except ValueError as e:
-        logger.error(f"Environment configuration error: {e}")
-    except Exception as e:
-        logger.error(f"An unknown error occurred during execution: {e}")
+def get_random_interval():
+    # each hour 3-12 times
+    times_per_hour = random.randint(3, 12)
+    return 3600 / times_per_hour
+
+def run_schedule():
+    while True:
+        try:
+            log_info("Starting scheduled tasks")
+
+            post_tweet()
+
+            log_info("Retweeting user's tweet")
+            retweet("target_user_id")
+
+            log_info("Commenting on tweet and replying")
+            comment_on_tweet("target_user_id")
+
+            interval = get_random_interval()
+            log_info(f"Waiting for {interval:.2f} seconds until next task")
+            time.sleep(interval)
+            
+        except Exception as e:
+            log_error(f"An error occurred: {str(e)}")
+
+            time.sleep(60)
+
+
